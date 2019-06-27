@@ -439,12 +439,12 @@
 			desc="Client FPS synchronization interval in ms"
 		/>
 		<setting
-			name="#bigdatabandwith"
+			name="#bigdatabandwidth"
 			value="50000"
 			group="_Advanced"
-			friendlyname="Sync big data bandwith"
-			accept="200-60000"
-			desc="Sync big data(i.e. report screenshots) bandwith in bytes/s"
+			friendlyname="Sync big data bandwidth"
+			accept="1000-1000000"
+			desc="Bandwidth of big data (i.e. report screenshots) synchronization latent events in bytes/s"
 		/>
 	</settings>
 </meta>
