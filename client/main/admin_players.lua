@@ -327,7 +327,7 @@ function aPlayersTab.onClickHandler(button)
 		aSkin.Show(player)
 
 	elseif source == aPlayersTab.gui.setTeamBtn then
-		aTeam.Show()
+		--aTeam.Show()
 
 	elseif source == aPlayersTab.gui.giveWeaponBtn then
 		triggerServerEvent(

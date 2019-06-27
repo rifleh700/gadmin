@@ -34,20 +34,18 @@ function aTeam.Create()
 	aTeam.gui.acceptBtn = guiCreateButton(0.55, 0.88, 0.20, 0.09, "Select", true, aTeam.gui.form)
 	aTeam.gui.closeBtn = guiCreateButton(0.77, 0.88, 0.20, 0.09, "Close", true, aTeam.gui.form)
 
-	--addEventHandler("onClientGUIClick", aTeam.gui.form, aTeam.gui.onClick)
-	--addEventHandler("onClientGUIDoubleClick", aTeam.gui.form, aTeam.gui.onDoubleClick)
+	addEventHandler("onClientGUIClick", aTeam.gui.form, aTeam.gui.onClickHandler)
+	addEventHandler("onClientGUIDoubleClick", aTeam.gui.form, aTeam.gui.onDoubleClickHandler)
 	
-	aRegister("PlayerTeam", aTeam.gui.form, aTeam.Show, aTeam.Close)
+	aRegister("PlayerTeam", aTeam.gui.form, aTeam.Open, aTeam.Close)
 end
 
 function aTeam.Destroy()
-	--removeEventHandler("onClientGUIClick", aTeam.gui.form, aTeam.gui.onClick)
-	--removeEventHandler("onClientGUIDoubleClick", aTeam.gui.form, aTeam.gui.onDoubleClick)
 	destroyElement(aTeam.gui.form)
 	aTeam.gui = {}
 end
 
-function aTeam.Show()
+function aTeam.Open()
 	if not aTeam.gui.form then
 		aTeam.Create()
 	end
@@ -65,67 +63,67 @@ function aTeam.Close(destroy)
 	end
 end
 
-function aTeam.onDoubleClick(button)
-	if (button == "left") then
-		if (source == aTeam.gui.list) then
-			if (guiGridListGetSelectedItem(aTeam.gui.list) ~= -1) then
-				local team = guiGridListGetItemText(aTeam.gui.list, guiGridListGetSelectedItem(aTeam.gui.list), 1)
-				triggerServerEvent("aPlayer", localPlayer, getSelectedPlayer(), "setteam", getTeamFromName(team))
-				aPlayerTeamClose(false)
+function aTeam.onClickHandler(key)
+	if key ~= "left" then return end
+
+	if (source == aTeam.gui.newBtn) then
+		aTeam.ShowNew(true)
+	elseif (source == aTeam.gui.refreshBtn) then
+		aTeam.Refresh()
+	elseif (source == aTeam.gui.deleteBtn) then
+		if (guiGridListGetSelectedItem(aTeam.gui.list) == -1) then
+			messageBox("No team selected!", MB_WARNING)
+		else
+			local team = guiGridListGetItemData(aTeam.gui.list, guiGridListGetSelectedItem(aTeam.gui.list), 1)
+			if (messageBox('Are you sure to delete "' .. getTeamName(team) .. '"?', MB_QUESTION, MB_YESNO)) then
+				triggerServerEvent("aTeam", localPlayer, "destroyteam", team)
 			end
 		end
+		setTimer(aTeam.Refresh, 2000, 1)
+	elseif (source == aTeam.gui.createBtn) then
+		local team = guiGetText(aTeam.gui.nameEdit)
+		if ((team == nil) or (team == false) or (team == "")) then
+			messageBox("Enter the team name!", MB_WARNING)
+		elseif (getTeamFromName(team)) then
+			messageBox("A team with this name already exists", MB_ERROR)
+		else
+			triggerServerEvent(
+				"aTeam",
+				localPlayer,
+				"createteam",
+				team,
+				guiGetText(aTeam.gui.redEdit),
+				guiGetText(aTeam.gui.greenEdit),
+				guiGetText(aTeam.gui.blueEdit)
+			)
+			aTeam.ShowNew(false)
+		end
+		setTimer(aTeam.Refresh, 2000, 1)
+	elseif (source == aTeam.gui.nameEdit) then
+		guiSetInputEnabled(true)
+	elseif (source == aTeam.gui.cancelBtn) then
+		aTeam.ShowNew(false)
+	elseif (source == aTeam.gui.acceptBtn) then
+		if (guiGridListGetSelectedItem(aTeam.gui.list) == -1) then
+			messageBox("No team selected!", MB_WARNING)
+		else
+			local team = guiGridListGetItemData(aTeam.gui.list, guiGridListGetSelectedItem(aTeam.gui.list), 1)
+			triggerServerEvent("aPlayer", localPlayer, getSelectedPlayer(), "setteam", team)
+			guiSetVisible(aTeam.gui.form, false)
+		end
+	elseif (source == aTeam.gui.closeBtn) then
+		aTeam.Close(false)
 	end
 end
 
-function aTeam.onClick(button)
-	if (button == "left") then
-		if (source == aTeam.gui.newBtn) then
-			aTeam.ShowNew(true)
-		elseif (source == aTeam.gui.refreshBtn) then
-			aTeam.Refresh()
-		elseif (source == aTeam.gui.deleteBtn) then
-			if (guiGridListGetSelectedItem(aTeam.gui.list) == -1) then
-				messageBox("No team selected!", MB_WARNING)
-			else
-				local team = guiGridListGetItemData(aTeam.gui.list, guiGridListGetSelectedItem(aTeam.gui.list), 1)
-				if (messageBox('Are you sure to delete "' .. getTeamName(team) .. '"?', MB_QUESTION, MB_YESNO)) then
-					triggerServerEvent("aTeam", localPlayer, "destroyteam", team)
-				end
-			end
-			setTimer(aTeam.Refresh, 2000, 1)
-		elseif (source == aTeam.gui.createBtn) then
-			local team = guiGetText(aTeam.gui.nameEdit)
-			if ((team == nil) or (team == false) or (team == "")) then
-				messageBox("Enter the team name!", MB_WARNING)
-			elseif (getTeamFromName(team)) then
-				messageBox("A team with this name already exists", MB_ERROR)
-			else
-				triggerServerEvent(
-					"aTeam",
-					localPlayer,
-					"createteam",
-					team,
-					guiGetText(aTeam.gui.redEdit),
-					guiGetText(aTeam.gui.greenEdit),
-					guiGetText(aTeam.gui.blueEdit)
-				)
-				aTeam.ShowNew(false)
-			end
-			setTimer(aTeam.Refresh, 2000, 1)
-		elseif (source == aTeam.gui.nameEdit) then
-			guiSetInputEnabled(true)
-		elseif (source == aTeam.gui.cancelBtn) then
-			aTeam.ShowNew(false)
-		elseif (source == aTeam.gui.acceptBtn) then
-			if (guiGridListGetSelectedItem(aTeam.gui.list) == -1) then
-				messageBox("No team selected!", MB_WARNING)
-			else
-				local team = guiGridListGetItemData(aTeam.gui.list, guiGridListGetSelectedItem(aTeam.gui.list), 1)
-				triggerServerEvent("aPlayer", localPlayer, getSelectedPlayer(), "setteam", team)
-				guiSetVisible(aTeam.gui.form, false)
-			end
-		elseif (source == aTeam.gui.closeBtn) then
-			aTeam.Close(false)
+function aTeam.onDoubleClickHandler(button)
+	if button ~= "left" then return end
+	
+	if (source == aTeam.gui.list) then
+		if (guiGridListGetSelectedItem(aTeam.gui.list) ~= -1) then
+			local team = guiGridListGetItemText(aTeam.gui.list, guiGridListGetSelectedItem(aTeam.gui.list), 1)
+			triggerServerEvent("aPlayer", localPlayer, getSelectedPlayer(), "setteam", getTeamFromName(team))
+			aPlayerTeamClose(false)
 		end
 	end
 end

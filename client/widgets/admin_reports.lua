@@ -20,7 +20,7 @@ function aReports.Create()
 	guiCheckBoxSetSelected(aReports.gui.soundChk, aGetSetting("reportSound") ~= false)
 	guiCheckBoxSetSelected(aReports.gui.outputChatChk, aGetSetting("reportOutput") ~= false)
 
-	aReports.gui.chatBtn = guiCreateButton(0.84, 0.14, 0.15, 0.055, "Show chat", true, aReports.gui.form)
+	aReports.gui.chatBtn = guiCreateButton(0.84, 0.14, 0.15, 0.055, "Chat history", true, aReports.gui.form)
 	aReports.gui.authorLbl = guiCreateLabel(0.43, 0.10, 0.4, 0.54, "Author:", true, aReports.gui.form)
 	aReports.gui.dateLbl = guiCreateLabel(0.43, 0.15, 0.4, 0.54, "Date:", true, aReports.gui.form)
 	aReports.gui.textMemo = guiCreateMemo(0.43, 0.21, 0.53, 0.35, "", true, aReports.gui.form)
@@ -149,10 +149,12 @@ function aReports.onClickHandler(key)
 		aReports.RequestScreenShots(id)
 		aReports.RefreshReportScreenShots()
 
+	--[[
 	elseif source == aReports.gui.chatBtn then
 		local id = aReports.GetSelected()
 		if not id then return messageBox("No message selected!", MB_ERROR) end
 		aReports.ShowChat(aReports.List[id].chat)
+	]]--
 
 	elseif getElementData(source, "type") == "view" then
 		local id = aReports.GetSelected()
