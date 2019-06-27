@@ -1,0 +1,10 @@
+<properties>
+	<property nid="hovercars" name="Hover Cars" />
+	<property nid="aircars" name="Air Cars" />
+	<property nid="extrabunny" name="Extra Bunny" />
+	<property nid="extrajump" name="Extra Jump" />
+	<property nid="randomfoliage" name="Random Foliage" default="true" />
+	<property nid="snipermoon" name="Sniper Moon" />
+	<property nid="extraairresistance" name="Extra Air Resistance" default="true" />
+	<property nid="underworldwarp" name="Under World Warp" default="true" />
+</properties>

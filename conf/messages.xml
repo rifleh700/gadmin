@@ -1,0 +1,441 @@
+<messages>
+	<!--
+	Accepted subgroups:
+		all		- output to chatbox for all
+		log		- log file output
+		player	- victim/player chatbox output
+		admin	- admin chatbox output
+	Variables:
+		$[player] 		- player
+		$[admin_4log]	- admin
+		$[data]			- additional information
+	-->
+
+	<!-- -------- PLAYER -------- -->
+	<group action="mute" color="red">
+		<all>$[player] has been muted$[by_admin_4all] $[data2]</all>
+		<log>$[admin_4log] has muted $[player] ($[data]) $[data2]</log>
+	</group>
+	<group action="unmute" color="green">
+		<all>$[player] has been unmuted $[data2]$[by_admin_4all]</all>
+		<log>$[admin_4log] has unmuted $[player] ($[data]) $[data2]</log>
+	</group>
+	<group action="freeze" color="red">
+		<admin>$[player] has been frozen</admin>
+		<player>You have been frozen$[by_admin_4all]</player>
+		<log>$[admin_4log] has frozen $[player]</log>
+	</group>
+	<group action="unfreeze" color="green">
+		<admin>$[player] has been unfrozen</admin>
+		<player>You have been unfrozen$[by_admin_4all]</player>
+		<log>$[admin_4log] has unfrozen $[player]</log>
+	</group>
+	<group action="shout" color="orange">
+		<admin>You have shouted at $[player]</admin>
+		<log>$[admin_4log] has shouted $[player] ($[data])</log>
+	</group>
+	<group action="slap" color="red">
+		<all>$[player] has been slapped$[by_admin_4all] ($[data] HP)</all>
+		<log>$[admin_4log] has slapped $[player] ($[data] HP)</log>
+	</group>
+	<group action="setadmingroup" color="orange">
+		<admin>$player has been given '$[data2]' admin rights</admin>
+		<player>You have been give '$[data2]' admin rights$[by_admin_4all]</player>
+		<log>$[admin_4log] has given '$[data2]' admin rights to $[player] ($[data])</log>
+	</group>
+	<group action="resetadmingroup" color="orange">
+		<admin>$[player]'s admin rights have been revoked</admin>
+		<player>Your admin rights have been revoked$[by_admin_4all]</player>
+		<log>$[admin_4log] has revoked admin rights ($[data2]) from $[player] ($[data])</log>
+	</group>
+	<group action="sethealth">
+		<admin>$[player]'s health has been changed to $[data]</admin>
+		<player>Your health has been changed to $[data]$[by_admin_4all]</player>
+		<log>$[admin_4log] has changed $[player]'s health to $[data]</log>
+	</group>
+	<group action="setarmour">
+		<admin>$[player]'s armour has been changed to $[data]</admin>
+		<player>Your armour has been changed to $[data]$[by_admin_4all]</player>
+		<log>$[admin_4log] has changed $[player]'s armour to $[data]</log>
+	</group>
+	<group action="setmoney">
+		<admin>$[player]'s money has been set to $[data]</admin>
+		<player>Your money has been set to $[data]$[by_admin_4all]</player>
+		<log>$[admin_4log] has set $[player]'s money to $[data]</log>
+	</group>
+	<group action="setskin">
+		<admin>$[player]'s skin has been changed to $[data]</admin>
+		<player>Your skin has been changed to $[data]$[by_admin_4all]</player>
+		<log>$[admin_4log] has changed $[player]'s skin to $[data]</log>
+	</group>
+	<group action="setfighting">
+		<admin>$[player]'s fighting style has been set to $[data]</admin>
+		<player>Your fighting style has been set to $[data]$[by_admin_4all]</player>
+		<log>$[admin_4log] has changed $[player]'s fighting style to $[data]</log>
+	</group>
+	<group action="setwalking">
+		<admin>$[player]'s walking style has been set to $[data]</admin>
+		<player>Your walking style has been set to $[data]$[by_admin_4all]</player>
+		<log>$[admin_4log] has changed $[player]'s walking style to $[data]</log>
+	</group>
+	<group action="setstat">
+		<admin>$[player]'s $[data] has been set to $[data2]</admin>
+		<player>Your $[data] has been set to $[data2]$[by_admin_4all]</player>
+		<log>$[admin_4log] has changed $[player]'s $[data] to $[data2]</log>
+	</group>
+	<group action="setnick" color="orange">
+		<all>$[data(strip_codes)]'s nick has been set to $[data2]$[by_admin_4all]</all>
+		<admin>$[data(strip_codes)]'s nick has been set to $[data2]</admin>
+		<player>Your nick has been set to $[data2]$[by_admin_4all]</player>
+		<log>$[admin_4log] has changed $[data]'s nick to $[data2]</log>
+	</group>
+	<group action="setteam">
+		<admin>$[player] has been moved to the '$[data]' team</admin>
+		<player>You have been moved to the '$[data]' team$[by_admin_4all]</player>
+		<log>$[admin_4log] has moved $[player] to the '$[data]' team</log>
+	</group>
+	<group action="removefromteam">
+		<admin>$[player] has been removed from the '$[data]' team</admin>
+		<player>You have been removed from the '$[data]' team$[by_admin_4all]</player>
+		<log>$[admin_4log] has removed $[player] from the '$[data]' team</log>
+	</group>
+	<group action="givejetpack" color="green">
+		<admin>$[player] has been given a jetpack</admin>
+		<player>You have been given a jetpack$[by_admin_4all]</player>
+		<log>$[admin_4log] has given a jetpack to $[player]</log>
+	</group>
+	<group action="removejetpack" color="red">
+		<admin>$[player]'s jetpack has been removed</admin>
+		<player>Your jetpack has been removed$[by_admin_4all]</player>
+		<log>$[admin_4log] has removed $[player]'s jetpack</log>
+	</group>
+	<group action="givevehicle" color="green">
+		<admin>$[player] has been given a '$[data]'</admin>
+		<player>You have been given a '$[data]'$[by_admin_4all]</player>
+		<log>$[admin_4log] has given $[player] a '$[data]'</log>
+	</group>
+	<group action="giveweapon" color="green">
+		<admin>$[player] has been given a '$[data]'($[data2])</admin>
+		<player>You have been given a '$[data]'($[data2])$[by_admin_4all]</player>
+		<log>$[admin_4log] has given $[player] '$[data]'($[data2])</log>
+	</group>
+	<group action="takeweapon" color="red">
+		<admin>$[player]'s '$[data]' has been removed</admin>
+		<player>Your '$[data]' has been removed$[by_admin_4all]</player>
+		<log>$[admin_4log] has removed $[player]'s '$[data]'</log>
+	</group>
+	<group action="takeallweapon" color="red">
+		<admin>$[player]'s all weapons have been removed</admin>
+		<player>Your all weapons have been removed$[by_admin_4all]</player>
+		<log>$[admin_4log] has removed $[player]'s all weapons</log>
+	</group>
+	<group action="warp">
+		<admin>$[player] has been warped to $[data(strip_codes)]</admin>
+		<player>You have been warped to $[data(strip_codes)]$[by_admin_4all]</player>
+		<log>$[admin_4log] has moved $[player] to $[data]</log>
+	</group>
+	<group action="warptointerior">
+		<admin>$[player] has been warped to '$[data]' interior</admin>
+		<player>You have been warped to '$[data]' interior$[by_admin_4all]</player>
+		<log>$[admin_4log] has moved $[player] to '$[data]' interior</log>
+	</group>
+	<group action="setinterior">
+		<admin>$[player] has been moved to the $[data] interior</admin>
+		<player>You have been moved to the $[data] interior$[by_admin_4all]</player>
+		<log>$[admin_4log] has moved $[player] to the $[data] interior</log>
+	</group>
+	<group action="setdimension">
+		<admin>$[player] has been moved to the $[data] dimension</admin>
+		<player>You have been moved to the $[data] dimension$[by_admin_4all]</player>
+		<log>$[admin_4log] has moved $[player] to the $[data] dimension</log>
+	</group>
+	<!--
+	<group action="getscreen">
+		<player>Your screen is being checked by $[admin_4log]</player>
+		<log>$[admin_4log] took $[player]'s screen shot</log>
+	</group>
+	-->
+
+	<!-- -------- TEAM -------- -->
+	<group action="createteam">
+		<admin>Successfully created team '$[data]'</admin>
+		<log>$[admin_4log] has created a team '$[data]'</log>
+	</group>
+	<group action="destroyteam">
+		<admin>Successfully destroyed team '$[data]'</admin>
+		<log>$[admin_4log] has destroyed a team '$[data]'</log>
+	</group>
+	
+	<!-- -------- VEHICLE -------- -->
+	<group action="repair" color="green">
+		<admin>$[player]'s vehicle has been fixed</admin>
+		<player>Your vehicle has been fixed$[by_admin_4all]</player>
+		<log>$[admin_4log] has fixed vehicle of $[player]</log>
+	</group>
+	<group action="addupgrades" color="green">
+		<admin>$[player]'s vehicle has been upgraded ($[data2])</admin>
+		<player>Your vehicle has been upgraded ($[data2])$[by_admin_4all]</player>
+		<log>$[admin_4log] has upgraded vehicle of $[player] ($[data])</log>
+	</group>
+	<group action="removeupgrades" color="red">
+		<admin>$[player]'s vehicle upgrades ($[data2]) have been removed</admin>
+		<player>Your vehicle upgrades ($[data2]) have been removed$[by_admin_4all]</player>
+		<log>$[admin_4log] has has removed vehicle upgrades ($[data]) of $[player]</log>
+	</group>
+	<group action="setpaintjob" color="green">
+		<admin>$[player]'s vehicle paint job set to $[data]</admin>
+		<player>Your vehicle paint job has been changed to $[data]$[by_admin_4all]</player>
+		<log>$[admin_4log] has changed paint job of $[player]'s vehicle to $[data]</log>
+	</group>
+	<group action="setcolor" color="green">
+		<admin>$[player]'s vehicle color($[data]) changed to $[data2]</admin>
+		<player>Your vehicle color($[data]) has been changed$[by_admin_4all]</player>
+		<log>$[admin_4log] has changed color($[data]) of $[player]'s vehicle to $[data2]</log>
+	</group>
+	<group action="setlightcolor" color="green">
+		<admin>$[player]'s vehicle lights color changed to $[data]</admin>
+		<player>Your vehicle lights color has been changed$[by_admin_4all]</player>
+		<log>$[admin_4log] has changed lights color of $[player]'s vehicle to $[data]</log>
+	</group>
+	<group action="blowvehicle" color="red">
+		<admin>$[player]'s vehicle has been blown</admin>
+		<player>Your vehicle has been blown$[by_admin_4all]</player>
+		<log>$[admin_4log] has blown vehicle of $[player]</log>
+	</group>
+	<group action="destroyvehicle" color="red">
+		<admin>$[player]'s vehicle has been destroyed</admin>
+		<player>Your vehicle has been destroyed$[by_admin_4all]</player>
+		<log>$[admin_4log] has destroyed vehicle of $[player]</log>
+	</group>
+	<group action="eject" color="red">
+		<admin>$[player]' have been ejected from vehicle</admin>
+		<player>You have been ejected from vehicle$[by_admin_4all]</player>
+		<log>$[admin_4log] has ejected $[player] from vehicle</log>
+	</group>
+	
+	<!-- -------- RESOURCE -------- -->
+	<group action="start">
+		<admin>Resource '$[data]' has been started' </admin>
+		<log>$[admin_4log] has started resource '$[data]'</log>
+	</group>
+	<group action="restart">
+		<admin>Resource '$[data]' has been restarted' </admin>
+		<log>$[admin_4log] has restarted resource '$[data]'</log>
+	</group>
+	<group action="stop">
+		<admin>Resource '$[data]' has been stopped' </admin>
+		<log>$[admin_4log] has stopped resource '$[data]'</log>
+	</group>
+	<group action="setsetting">
+		<admin>Resource '$[data]' setting '$[data2]' has been set to '$[data3]' </admin>
+		<log>$[admin_4log] has set resource '$[data]' setting '$[data2]' to '$[data3]'</log>
+	</group>
+
+	<!-- -------- SERVER -------- -->
+	<group action="setpassword">
+		<admin>Server password set to '$[data]'</admin>
+		<log>$[admin_4log] has set server password to '$[data]'</log>
+	</group>
+	<group action="resetpassword">
+		<admin>Server password has been reset</admin>
+		<log>$[admin_4log] has reset server password</log>
+	</group>
+	<group action="setgametype">
+		<admin>ASE gamemode info has been changed to '$[data]'</admin>
+		<log>$[admin_4log] has changed ASE gamemode to '$[data]'</log>
+	</group>
+	<group action="setmapname">
+		<admin>ASE map info has been changed to '$[data]'</admin>
+		<log>$[admin_4log] has changed ASE map info to '$[data]'</log>
+	</group>
+	<group action="setfpslimit">
+		<all>FPS limit set to $[data]$[by_admin_4all]</all>
+		<log>$[admin_4log] has set fps limit to $[data]</log>
+	</group>
+	<group action="setglitch">
+		<all>Glitch '$[data]' has been $[data2]$[by_admin_4all]</all>
+		<log>$[admin_4log] has $[data2] '$[data]' glitch</log>
+	</group>
+	<group action="setworldproperty">
+		<all>World special property '$[data]' has been $[data2]$[by_admin_4all]</all>
+		<log>$[admin_4log] has $[data2] '$[data]' world special property</log>
+	</group>
+	<group action="settime">
+		<all>Time set to $[data]$[by_admin_4all]</all>
+		<log>$[admin_4log] has changed time to $[data]</log>
+	</group>
+	<group action="setminuteduration">
+		<all>Minute duration set to $[data] seconds$[by_admin_4all]</all>
+		<log>$[admin_4log] has set minute duration to $[data]</log>
+	</group>
+	<group action="setweather">
+		<all>Weather set to $[data]$[by_admin_4all]</all>
+		<log>$[admin_4log] has set weather to $[data]</log>
+	</group>
+	<group action="blendweather">
+		<all>Blending weather to $[data]$[by_admin_4all]</all>
+		<log>$[admin_4log] is blending weather to $[data]</log>
+	</group>
+	<group action="setblurlevel">
+		<all>Blur level set to $[data]$[by_admin_4all]</all>
+		<log>$[admin_4log] has set blur level to $[data]</log>
+	</group>
+	<group action="setheathazelevel">
+		<all>Heat haze level set to $[data]$[by_admin_4all]</all>
+		<log>$[admin_4log] has set heat haze level to $[data]</log>
+	</group>
+	<group action="setwaveheight">
+		<all>Waves height set to $[data]$[by_admin_4all]</all>
+		<log>$[admin_4log] has set waves height to $[data]</log>
+	</group>
+	<group action="setgamespeed">
+		<all>Game speed set to $[data]$[by_admin_4all]</all>
+		<log>$[admin_4log] has set game speed to $[data]</log>
+	</group>
+	<group action="setgravity">
+		<all>Gravitation value set to $[data]$[by_admin_4all]</all>
+		<log>$[admin_4log] has set gravitation to $[data]</log>
+	</group>
+	<group action="shutdown" color="orange">
+		<all>Server has been shutdown ($[data])$[by_admin_4all]</all>
+		<log>$[admin_4log] has shutdown server ($[data])</log>
+	</group>
+
+	<!-- -------- ADMIN PANEL -------- -->
+
+	<!-- -------- ADMIN -------- -->
+	<group action="warpme">
+		<admin>You have been warped to $[data(strip_codes)]</admin>
+		<log>$[admin_4log] has moved himself to $[data]</log>
+	</group>
+	<group action="achat">
+		<log>ADMINCHAT: $[admin_4log]: $[data]</log>
+	</group>
+	<group action="asay">
+		<log>ADMINSAY: $[admin_4log]: $[data]</log>
+	</group>
+	<group action="execute">
+		<admin>Code executed with result: $[data2]</admin>
+		<log>$[admin_4log] has executed code: '$[data]'</log>
+	</group>
+	
+	<!-- -------- BAN -------- -->
+	<group action="kick" color="red">
+		<all>$[data3(strip_codes)] has been kicked$[by_admin_4all] $[data4]</all>
+		<log>$[admin_4log] has kicked $[data3] (Serial: $[data], IP: $[data2]) $[data4]</log>
+	</group>
+	<group action="ban" color="red">
+		<all>$[data3(strip_codes)] has been banned$[by_admin_4all] $[data4]</all>
+		<log>$[admin_4log] has banned $[data3] (Serial: $[data], IP: $[data2]) $[data4]</log>
+	</group>
+	<group action="banserial" color="red">
+		<all>$[data3(strip_codes)] has been banned$[by_admin_4all] $[data4]</all>
+		<admin>Ban (Serial: $[data], IP: $[data2]) successfully added to bans list</admin>
+		<log>$[admin_4log] has added new ban (Serial: $[data], IP: $[data2], Nick: $[data3]) $[data4]</log>
+	</group>
+	<!--
+	<group action="banserial" color="red">
+		<all>$[data2(strip_codes)] has been banned$[by_admin_4all] $[data3]</all>
+		<admin>Serial $[data] successfully added to bans list</admin>
+		<log>$[admin_4log] has banned serial $[data] ($[data2]) $[data3]</log>
+	</group>
+	<group action="banip" color="red">
+		<all>$[data2(strip_codes)] has been banned$[by_admin_4all] $[data3]</all>
+		<admin>IP $[data] successfully added to bans list</admin>
+		<log>$[admin_4log] has banned IP $[data] ($[data2]) $[data3]</log>
+	</group>
+	<group action="banserialip" color="red">
+		<all>$[data3(strip_codes)] has been banned$[by_admin_4all] $[data4]</all>
+		<admin>Ban (Serial: $[data], IP: $[data2]) successfully added to bans list</admin>
+		<log>$[admin_4log] has added ban (Serial: $[data], IP: $[data2], Nick: $[data3]) $[data4]</log>
+	</group>
+	-->
+	<group action="unban" color="green">
+		<all>$[data3(strip_codes)] has been unbanned $[data4]$[by_admin_4all]</all>
+		<admin>Ban (Serial: $[data], IP: $[data2]) successfully removed from bans list</admin>
+		<log>$[admin_4log] has removed ban (Serial: $[data], IP: $[data2], Nick: $[data3]) $[data4]</log>
+	</group>
+	<group action="setbannick">
+		<admin>Ban nick has been changed from '$[data3]' to '$[data4]'</admin>
+		<log>$[admin_4log] has changed ban (Serial: $[data], IP: $[data2]) nick from '$[data3]' to '$[data4]'</log>
+	</group>
+		<group action="setbanreason">
+		<admin>Ban reason has been changed from '$[data3]' to '$[data4]'</admin>
+		<log>$[admin_4log] has changed ban (Serial: $[data], IP: $[data2]) reason from '$[data3]' to '$[data4]'</log>
+	</group>
+
+	<!-- -------- MUTE -------- -->
+	<group action="muteserial" color="red">
+		<all>$[data2(strip_codes)] has been muted$[by_admin_4all] $[data3]</all>
+		<admin>Serial $[data] successfully added to mutes list</admin>
+		<log>$[admin_4log] has muted serial $[data] ($[data2]) $[data3]</log>
+	</group>
+	<group action="unmuteserial" color="green">
+		<all>$[data2(strip_codes)] has been unmuted $[data3]$[by_admin_4all]</all>
+		<admin>Serial $[data] successfully removed from mutes list</admin>
+		<log>$[admin] has unmuted serial $[data] ($[data2]) $[data3]</log>
+	</group>
+	<group action="setmutenick">
+		<admin>Mute nick has been changed from '$[data2]' to '$[data3]'</admin>
+		<log>$[admin_4log] has changed mute (Serial: $[data]) nick from '$[data2]' to '$[data3]'</log>
+	</group>
+		<group action="setmutereason">
+		<admin>Mute reason has been changed from '$[data2]' to '$[data3]'</admin>
+		<log>$[admin_4log] has changed mute (Serial: $[data]) reason from '$[data2]' to '$[data3]'</log>
+	</group>
+	
+	<!-- -------- ACL -------- -->
+	<group action="aclcreate">
+		<admin>ACL '$[data]' has been successfully created</admin>
+		<log>ACL '$[data]' has been created by $[admin_4log]</log>
+	</group>
+	<group action="acldestroy">
+		<admin>ACL '$[data]' has been successfully destroyed</admin>
+		<log>ACL '$[data]' has been destroyed by $[admin_4log]</log>
+	</group>
+	<group action="aclcreategroup">
+		<admin>ACL group '$[data]' has been successfully created</admin>
+		<log>ACL group '$[data]' has been created by $[admin_4log]</log>
+	</group>
+	<group action="acldestroygroup">
+		<admin>ACL group '$[data]' has been successfully destroyed</admin>
+		<log>ACL group '$[data]' has been destroyed by $[admin_4log]</log>
+	</group>
+	<group action="aclgroupaddacl">
+		<admin>ACL '$[data2]' has been successfully added to group '$[data]'</admin>
+		<log>ACL '$[data2]' has been added to group '$[data]' by $[admin_4log]</log>
+	</group>
+	<group action="aclgroupremoveacl">
+		<admin>ACL '$[data2]' has been successfully removed from group '$[data]'</admin>
+		<log>ACL '$[data2]' has been removed from group '$[data]' by $[admin_4log]</log>
+	</group>
+	<group action="aclgroupaddobject">
+		<admin>object '$[data2]' has been successfully added to ACL group '$[data]'</admin>
+		<log>object '$[data2]' has been added to ACL group '$[data]' by $[admin_4log]</log>
+	</group>
+	<group action="aclgroupremoveobject">
+		<admin>object '$[data2]' has been successfully removed from ACL group '$[data]'</admin>
+		<log>object '$[data2]' has been removed from ACL group '$[data]' by $[admin_4log]</log>
+	</group>
+	<group action="aclsetright">
+		<admin>ACL '$[data]' right '$[data2]' set to '$[data3]'</admin>
+		<log>ACL '$[data]' right '$[data2]' set to '$[data3]' by $[admin_4log]</log>
+	</group>
+	<group action="aclremoveright">
+		<admin>right '$[data2]' has been successfully removed from ACL '$[data]'</admin>
+		<log>right '$[data2]' has been removed from ACL '$[data]' by $[admin_4log]</log>
+	</group>
+	<group action="restoreadminacl">
+		<admin>Admin panel ACL successfully restored</admin>
+		<log>Admin panel ACL was restored by $[admin_4log]</log>
+	</group>
+	<group action="restoreacl">
+		<admin>Server ACL successfully restored</admin>
+		<log>Server ACL was restored by $[admin_4log]</log>
+	</group>
+	<group action="reloadacl">
+		<admin>Server ACL successfully reloaded</admin>
+		<log>Server ACL was reloaded by $[admin_4log]</log>
+	</group>
+
+</messages>

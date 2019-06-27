@@ -1,0 +1,13 @@
+<colors>
+	<color name="white" 		r="255"	g="255"	b="255"	/>
+	<color name="red" 			r="255"	g="127"	b="127"	/>
+	<color name="orange" 		r="255"	g="127"	b="63"	/>
+	<color name="yellow" 		r="255"	g="255"	b="127"	/>
+	<color name="green" 		r="127"	g="255"	b="127"	/>
+	<color name="aqua" 			r="127"	g="255"	b="255"	/>
+	<color name="blue" 			r="127"	g="127"	b="255"	/>
+	<color name="purple" 		r="255"	g="127"	b="255"	/>
+
+	<color name="acl" 			r="255"	g="168"	b="0"	/>
+	<color name="console" 		r="223"	g="149"	b="232"	/>
+</colors>

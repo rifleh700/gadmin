@@ -1,0 +1,11 @@
+<glithes>
+	<glitch nid="quickreload" name="Quick Reload" />
+	<glitch nid="fastmove" name="Fast Move" />
+	<glitch nid="fastfire" name="Fast Fire" />
+	<glitch nid="crouchbug" name="Crouch Bug" />
+	<glitch nid="highcloserangedamage" name="High Close Range Damage" />
+	<glitch nid="hitanim" name="Hit Anim" />
+	<glitch nid="fastsprint" name="Fast Sprint" />
+	<glitch nid="baddrivebyhitbox" name="Bad Driveby Hit Box" />
+	<glitch nid="quickstand" name="Quick Stand" />
+</glithes>

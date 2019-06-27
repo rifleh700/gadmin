@@ -1,0 +1,147 @@
+<commands>
+	<!-- 
+		name		- the command used by player and internal admin call (do not change)
+		args		- argument types for conversion (do not change)
+		argnames	- argument names for feedback
+	-->
+
+	<!--
+		P 		- player(by name)
+		T 		- team(by name)
+		R 		- resource(by name)
+		
+		ve 		- vehicle ID
+		ven		- vehicle ID(by name)
+		we 		- weapon ID
+		wen		- weapon ID(by name)
+		skn		- skin ID(by name)
+		fin		- fighting style ID(by name)
+		wan		- walking style ID(by name)
+		stn		- stat ID(by name)
+		inn		- interior name
+
+		se		- serial
+		ip		- ip
+		du 		- duration(i.e. 12h)
+		co 		- color component(0-255)
+
+		s 		- string
+		i 		- number
+		b 		- boolean(yes/no)
+		n		- nil(none)
+		s- 		- concatenated string
+		ts-		- table with strings
+		ti-		- table with numbers
+	-->
+
+	<!-- player -->
+	<command name="mute"					args="P[du,s-"			argnames="player,duration,reason"		/>
+	<command name="unmute"					args="P"				argnames="player"						/>
+	<command name="freeze"					args="P"				argnames="player"						/>
+	<command name="unfreeze"				args="P"				argnames="player"						/>
+	<command name="shout"					args="P,s-"				argnames="player,message"				/>
+	<command name="slap"					args="P,i"				argnames="player,health"				/>
+	<command name="setadmingroup"			args="P,s"				argnames="player,aclgroup-name"			/>
+	<command name="resetadmingroup"			args="P"				argnames="player"						/>
+	<command name="sethealth"				args="P,i"				argnames="player,health"				/>
+	<command name="setarmour"				args="P,i"				argnames="player,armour"				/>
+	<command name="setmoney"				args="P,i"				argnames="player,money"					/>
+	<command name="setskin"					args="P,i|skn[b"		argnames="player,skin-ID/name,walking-style(yes/no)" />
+	<command name="setfighting"				args="P,i|fin"			argnames="player,style-ID"				/>
+	<command name="setwalking"				args="P,i|wan"			argnames="player,style-ID"				/>
+	<command name="setstat"					args="P,i|stn,i"		argnames="player,stat-ID,value"			/>
+	<command name="setnick"					args="P,s"				argnames="player,nick"					/>
+	<command name="setteam"					args="P,T"				argnames="player,team-name"				/>
+	<command name="removefromteam"			args="P"				argnames="player"						/>
+	<command name="removejetpack"			args="P"				argnames="player"						/>
+	<command name="givejetpack"				args="P"				argnames="player"						/>
+	<command name="givevehicle"				args="P,ve|ven"			argnames="player,vehicle-ID/name"		/>
+	<command name="giveweapon"				args="P,we|wen,i"		argnames="player,weapon-ID/name,ammo"	/>
+	<command name="takeweapon"				args="P,we|wen"			argnames="player,weapon-ID/name"		/>
+	<command name="takeallweapon"			args="P"				argnames="player"						/>
+	<command name="warp"					args="P,P"				argnames="player,to-player"				/>
+	<command name="warptointerior"			args="P,inn"			argnames="player,interior-name"			/>
+	<command name="setinterior"				args="P,i"				argnames="player,interior"				/>
+	<command name="setdimension"			args="P,i"				argnames="player,dimension"				/>
+
+	<!-- team -->
+	<command name="createteam"				args="s[co,co,co"		argnames="name,R,G,B"					/>
+	<command name="destroyteam"				args="T"				argnames="team-name"					/>
+			
+	<!-- vehicle -->
+	<command name="repair"					args="P"				argnames="player"						/>"
+	<command name="addupgrades"				args="P,ti-"			argnames="player,upgrade-IDs"			/>
+	<command name="removeupgrades"			args="P[ti-"			argnames="player,upgrade-IDs"			/>
+	<command name="setpaintjob"				args="P,i"				argnames="player,paintjob-ID"			/>
+	<command name="setcolor"				args="P,i,co,co,co"		argnames="player,color-number,R,G,B"	/>
+	<command name="setlightcolor"			args="P,co,co,co"		argnames="player,R,G,B"					/>
+	<command name="blowvehicle"				args="P"				argnames="player"						/>
+	<command name="destroyvehicle"			args="P"				argnames="player"						/>
+	<command name="eject"					args="P"				argnames="player"						/>
+			
+	<!-- resource -->
+	<command name="setsetting"				args="R,s,s"			argnames="resource,setting,value"		/>
+
+	<!-- server -->
+	<command name="setpassword"				args="s"				argnames="password"						/>
+	<command name="resetpassword"			args=""					argnames=""								/>
+	<command name="setgametype"				args="[s-"				argnames="game-type-name"				/>
+	<command name="setmapname"				args="[s-"				argnames="map-name"						/>
+	<command name="setfpslimit"				args="[i"				argnames="fps"							/>
+	<command name="setglitch"				args="s,b"				argnames="glitch,enabled(yes/no)"		/>
+	<command name="setworldproperty"		args="s,b"				argnames="property,enabled(yes/no)"		/>
+	<command name="settime"					args="[i,i"				argnames="hours,minutes"				/>
+	<command name="setminuteduration"		args="[i"				argnames="seconds"						/>
+	<command name="setweather"				args="i"				argnames="weather-ID"					/>
+	<command name="blendweather"			args="i"				argnames="weather-ID"					/>
+	<command name="setblurlevel"			args="[i"				argnames="blur"							/>
+	<command name="setheathazelevel"		args="[i"				argnames="haze"							/>
+	<command name="setwaveheight"			args="[i"				argnames="height"						/>
+	<command name="setgamespeed"			args="[i"				argnames="speed"						/>
+	<command name="setgravity"				args="[i"				argnames="gravity"						/>
+
+	<!-- admin panel -->
+	<command name="setpingkicker"			args="i"				argnames="ping"							/>
+	<command name="setfpskicker"			args="i"				argnames="fps"							/>
+	<command name="setidlekicker"			args="i"				argnames="seconds"						/>			
+
+	<!-- admin -->
+	<command name="achat"					args="s-"				argnames="message"						/>
+	<command name="warpme"					args="P"				argnames="to-player"					/>
+	<command name="asay"					args="s-"				argnames="message"						/>
+	<command name="execute"					args="s-"				argnames="code"							/>
+
+	<!-- ban -->
+	<command name="kick"					args="P[s-"				argnames="player,reason"				/>
+	<command name="ban"						args="P[b,du,s-"		argnames="player,include-IP(yes/no),duration,reason"	/>
+	<command name="banserial"				args="se[ip|n,s,du,s-"	argnames="serial,IP/none,nick,duration,reason" />
+	<!--
+	<command name="banserial"				args="se[s,du,s-"		argnames="serial,nick,duration,reason"	/>
+	<command name="banip"					args="ip[s,du,s-"		argnames="IP,nick,duration,reason"		/>
+	<command name="banserialip"				args="se,ip[s,du,s-"	argnames="serial,IP,nick,duration,reason"/>
+	-->
+	<command name="unban"					args="se|ip"			argnames="serial/IP"					/>
+	<command name="setbannick"				args="se|ip,s"			argnames="serial/IP,nick"				/>
+	<command name="setbanreason"			args="se|ip,s-"			argnames="serial/IP,reason"				/>
+
+	<!-- mute -->
+	<command name="muteserial"				args="se[s,du,s-"		argnames="serial,nick,duration,reason"	/>
+	<command name="unmuteserial"			args="se"				argnames="serial"						/>
+	<command name="setmutenick"				args="se,s"				argnames="serial,nick"					/>
+	<command name="setmutereason"			args="se,s-"			argnames="serial,reason"				/>
+
+	<!-- ACL -->
+	<command name="aclcreate"				args="s"				argnames="acl-name"						/>
+	<command name="acldestroy"				args="s"				argnames="acl-name"						/>
+	<command name="aclcreategroup"			args="s"				argnames="aclgroup-name"				/>
+	<command name="acldestroygroup"			args="s"				argnames="aclgroup-name"				/>
+	<command name="aclgroupaddacl"			args="s,s"				argnames="aclgroup-name,acl-name"		/>
+	<command name="aclgroupremoveacl"		args="s,s"				argnames="aclgroup-name,acl-name"		/>
+	<command name="aclgroupaddobject"		args="s,s"				argnames="aclgroup-name,object-name"	/>
+	<command name="aclgroupremoveobject"	args="s,s"				argnames="aclgroup-name,object-name"	/>
+	<command name="aclsetright"				args="s,s[b"			argnames="acl-name,right-name,access(yes/no)" />
+	<command name="aclremoveright"			args="s,s"				argnames="acl-name,right-name"			/>
+	<command name="restoreadminacl"			args=""					argnames=""								/>
+	<command name="restoreacl"				args=""					argnames=""								/>
+	
+</commands>
