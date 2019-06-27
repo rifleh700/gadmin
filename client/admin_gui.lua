@@ -183,6 +183,8 @@ function guiLabelCalculateHeight(label, maxw)
 	local textent = guiLabelGetTextExtent(label)
 	local fheight = guiLabelGetFontHeight(label)
 
+	if textent < maxw then return textent, fheight end 
+
 	local words = split(text, " ")
 	for i, word in ipairs(words) do
 		local wextent = (string.len(word)+2)/length * textent
