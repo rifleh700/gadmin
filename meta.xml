@@ -107,6 +107,7 @@
 	<config src="conf/ACL_default.xml"								type="server" /> <!-- do not change! -->
 	<config src="conf/server_ACL_default.xml"						type="server" /> <!-- do not change! -->
 
+	<!-- maybe need protect -->
 	<!--
 	<config src="data/mutelist.xml"									type="server" />
 	<config src="data/reports.xml"									type="server" />

@@ -12,10 +12,11 @@ function string.upperf(s)
 end
 
 function math.clamp(v, a, b)
-	if b < a then return false end
-	if v < a then
+	if a and b and a > b then return false end
+	if a and v < a then
 		v = a
-	elseif v > b then
+	end
+	if b and v > b then
 		v = b
 	end
 	return v
