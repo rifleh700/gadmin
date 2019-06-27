@@ -107,8 +107,10 @@
 	<config src="conf/ACL_default.xml"								type="server" /> <!-- do not change! -->
 	<config src="conf/server_ACL_default.xml"						type="server" /> <!-- do not change! -->
 
+	<!--
 	<config src="data/mutelist.xml"									type="server" />
 	<config src="data/reports.xml"									type="server" />
+	-->
 
 	<!--Images-->
 	<file src="client/images/warning.png" />
