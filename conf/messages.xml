@@ -39,7 +39,7 @@
 		<log>$[admin_4log] has slapped $[player] ($[data] HP)</log>
 	</group>
 	<group action="setadmingroup" color="orange">
-		<admin>$player has been given '$[data2]' admin rights</admin>
+		<admin>$[player] has been given '$[data2]' admin rights</admin>
 		<player>You have been give '$[data2]' admin rights$[by_admin_4all]</player>
 		<log>$[admin_4log] has given '$[data2]' admin rights to $[player] ($[data])</log>
 	</group>
