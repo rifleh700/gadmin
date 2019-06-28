@@ -64,9 +64,9 @@ function aMute.Open(player, serial, nick, duration, reason)
 	guiSetText(aMute.gui.serialEdit, serial or "")
 	guiSetText(aMute.gui.nickVLbl, nick or "")
 	guiSetText(aMute.gui.nickEdit, nick or "")
-	aMute.SetDuration(duration or 0)
 	guiSetText(aMute.gui.reasonEdit, reason or "")
-
+	if duration then aMute.SetDuration(duration or 0) end
+	
 	if player then
 		guiSetText(aMute.gui.form, "Mute player "..nick)
 		guiSetVisible(aMute.gui.serialEdit, false)

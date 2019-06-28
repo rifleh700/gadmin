@@ -15,14 +15,13 @@ function aBan.Create()
 	aBan.gui.serialVLbl = guiCreateLabel(90, 30, 230, 18, "", false, aBan.gui.form)
 	aBan.gui.serialEdit = guiCreateEdit(90, 30, 230, 18, "", false, aBan.gui.form)
 
-	aBan.gui.ipChk = guiCreateCheckBox(40, 50, 18, 18, "", false, false, aBan.gui.form)
+	aBan.gui.ipChk = guiCreateCheckBox(40, 50, 18, 18, "", true, false, aBan.gui.form)
 	aBan.gui.ipLbl = guiCreateLabel(60, 50, 20, 18, "IP: ", false, aBan.gui.form)
 	guiLabelSetHorizontalAlign(aBan.gui.serialLbl, "right")
 	aBan.gui.ipVLbl = guiCreateLabel(90, 50, 230, 18, "", false, aBan.gui.form)
-	guiSetVisible(aBan.gui.ipVLbl, false)
 	aBan.gui.ipEdit = guiCreateEdit(90, 50, 230, 18, "", false, aBan.gui.form)
-	guiSetVisible(aBan.gui.ipEdit, false)
 	aBan.gui.ipDisLbl = guiCreateLabel(90, 50, 230, 18, "disabled", false, aBan.gui.form)
+	aBan.SetIPState(true)
 
 	guiCreateSeparator(20, 80, 300, 1, 255, 0, 0, false, aBan.gui.form)
 
@@ -73,11 +72,10 @@ function aBan.Open(player, serial, ip, nick, duration, reason)
 	guiSetText(aBan.gui.serialEdit, serial or "")
 	guiSetText(aBan.gui.ipVLbl, ip or "")
 	guiSetText(aBan.gui.ipEdit, ip or "")
-	aBan.SetIPState(ip and true or false)
 	guiSetText(aBan.gui.nickVLbl, nick or "")
 	guiSetText(aBan.gui.nickEdit, nick or "")
-	aBan.SetDuration(duration or 0)
 	guiSetText(aBan.gui.reasonEdit, reason or "")
+	if duration then aBan.SetDuration(duration) end
 
 	if player then
 		guiSetText(aBan.gui.form, "Ban player "..nick)
@@ -119,12 +117,12 @@ end
 function aBan.Accept()
 	if not aBan.CheckArguments() then return end
 	aBan.Result = true
-	aBan.Close(false)
+	aBan.Close()
 end
 
 function aBan.Cancel(button)
 	aBan.Result = false
-	aBan.Close(false)
+	aBan.Close()
 end
 
 function aBan.onClickHandler(button)
