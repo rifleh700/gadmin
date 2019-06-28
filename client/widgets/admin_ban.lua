@@ -120,13 +120,13 @@ function aBan.Accept()
 	aBan.Close()
 end
 
-function aBan.Cancel(button)
+function aBan.Cancel()
 	aBan.Result = false
 	aBan.Close()
 end
 
-function aBan.onClickHandler(button)
-	if button ~= "left" then return end
+function aBan.onClickHandler(key)
+	if key ~= "left" then return end
 
 	if source == aBan.gui.ipChk then
 		aBan.SetIPState(guiCheckBoxGetSelected(source))

@@ -110,13 +110,13 @@ function aMute.Accept()
 	aMute.Close()
 end
 
-function aMute.Cancel(button)
+function aMute.Cancel()
 	aMute.Result = false
 	aMute.Close()
 end
 
-function aMute.onClickHandler(button)
-	if button ~= "left" then return end
+function aMute.onClickHandler(key)
+	if key ~= "left" then return end
 
 	if source == aMute.gui.okBtn then
 		aMute.Accept()
