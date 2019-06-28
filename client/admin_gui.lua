@@ -1059,17 +1059,20 @@ function guiGetAbsolutePosition(element)
 	return x, y
 end
 
+local inputEdit = nil
 function guiHandleInput(element)
 	addEventHandler("onClientGUIFocus", element,
 		function()
-			if guiGetProperty(element, "ReadOnly") == "True" then return end
+			inputEdit = element
 			guiSetInputEnabled(true)
 		end,
 		false
 	)
 	addEventHandler("onClientGUIBlur", element,
 		function()
+			if inputEdit ~= element then return end
 			guiSetInputEnabled(false)
+			inputEdit = nil
 		end
 	)
 end
