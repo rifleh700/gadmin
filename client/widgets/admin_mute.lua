@@ -65,8 +65,8 @@ function aMute.Open(player, serial, nick, duration, reason)
 	guiSetText(aMute.gui.nickVLbl, nick or "")
 	guiSetText(aMute.gui.nickEdit, nick or "")
 	guiSetText(aMute.gui.reasonEdit, reason or "")
-	if duration then aMute.SetDuration(duration or 0) end
-	
+	if duration then aMute.SetDuration(duration) end
+
 	if player then
 		guiSetText(aMute.gui.form, "Mute player "..nick)
 		guiSetVisible(aMute.gui.serialEdit, false)
@@ -107,12 +107,12 @@ end
 function aMute.Accept()
 	if not aMute.CheckArguments() then return end
 	aMute.Result = true
-	aMute.Close(false)
+	aMute.Close()
 end
 
 function aMute.Cancel(button)
 	aMute.Result = false
-	aMute.Close(false)
+	aMute.Close()
 end
 
 function aMute.onClickHandler(button)
