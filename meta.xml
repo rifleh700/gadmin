@@ -103,9 +103,8 @@
 
 	<config src="conf/messages.xml"									type="server" />
 	<config src="conf/commands.xml"									type="server" />
-	<config src="conf/ACL.xml"										type="server" />
-	<config src="conf/ACL_default.xml"								type="server" /> <!-- do not change! -->
-	<config src="conf/server_ACL_default.xml"						type="server" /> <!-- do not change! -->
+	<config src="conf/ACL.xml"										type="server" /> <!-- do not change! -->
+	<config src="conf/serverACL.xml"								type="server" /> <!-- do not change! -->
 
 	<!-- maybe need protect -->
 	<!--

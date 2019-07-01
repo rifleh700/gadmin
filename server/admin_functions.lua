@@ -781,7 +781,6 @@ aFunctions = {
 		local acl = aclGet(aclName)
 		if not acl then return false, "ACL '"..aclName.."' does not exist" end
 		if not aclDestroy(acl) then return false end
-		aACLDestroy(aclName)
 		return true, pack(aclName)
 	end,
 
@@ -803,7 +802,7 @@ aFunctions = {
 		if not group then return false, "ACL group '"..groupName.."' does not exist" end
 		local acl = aclGet(aclName)
 		if not acl then return false, "ACL '"..aclName.."' does not exist" end
-		if isACLInGroup(acl, group) then return false, "ACL '"..aclName.."' is already in group '"..groupName.."'" end
+		if aclInGroup(acl, group) then return false, "ACL '"..aclName.."' is already in group '"..groupName.."'" end
 		if not aclGroupAddACL(group, acl) then return false end
 		return true, pack(groupName, aclName)
 	end,
@@ -813,7 +812,7 @@ aFunctions = {
 		if not group then return false, "ACL group '"..groupName.."' does not exist" end
 		local acl = aclGet(aclName)
 		if not acl then return false, "ACL '"..aclName.."' does not exist" end
-		if not isACLInGroup(acl, group) then return false, "ACL '"..aclName.."' is not in group '"..groupName.."'" end
+		if not aclInGroup(acl, group) then return false, "ACL '"..aclName.."' is not in group '"..groupName.."'" end
 		if not aclGroupRemoveACL(group, acl) then return false end
 		return true, pack(groupName, aclName)
 	end,
@@ -839,7 +838,6 @@ aFunctions = {
 		local acl = aclGet(aclName)
 		if not acl then return false, "ACL '"..aclName.."' does not exist" end
 		if not aclSetRight(acl, right, access) then return false end
-		aACLSetRight(aclName, right, access)
 		return true, pack(aclName, right, tostring(access))
 	end,
 
@@ -848,7 +846,6 @@ aFunctions = {
 		if not acl then return false, "ACL '"..aclName.."' does not exist" end
 		if aclGetRight(acl, right) == nil then return false, "right '"..right.."' does not exist in ACL '"..aclName.."'" end
 		if not aclRemoveRight(acl, right) then return false end
-		aACLRemoveRight(aclName, right)
 		return true, pack(aclName, right)
 	end,
 

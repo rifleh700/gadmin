@@ -57,7 +57,7 @@ function aSetupACL()
 
 	local fileData = getACLConfigFileData("conf/ACL.xml")
 	if not fileData then
-		outputDebugString(LOG_PREFIX..": Couldn't load vanila ACL! Please use 'restoreadminacl' command or reinstall the resource", 3)
+		outputDebugString(LOG_PREFIX..": Couldn't load vanila ACL! Please reinstall the resource", 3)
 		return false
 	end
 
@@ -74,88 +74,105 @@ function aSetupACL()
 	end
 
 	if not adminACLs["Default"] then
-		outputDebugString(LOG_PREFIX..": Couldn't find 'Default' ACL! Please use 'restoreadminacl' command or reinstall the resource", 3)
+		outputDebugString(LOG_PREFIX..": Couldn't find 'Default' ACL! Please reinstall the resource", 3)
 		return false
+	end
+
+	local defaultACL = aclGet("Default")
+	if not defaultACL then
+		outputDebugString(LOG_PREFIX..": Couldn't find server 'Default' ACL! Please use 'restoreacl' command or reinstall server ACL config", 3)
+		return false
+	end
+
+	local setupRights = {}
+	for i, right in ipairs(adminDefaultRights) do
+		if not aclRightExists(defaultACL, right) then
+			setupRights[#setupRights + 1] = right
+		end
+	end
+	if #setupRights == 0 then
+		outputDebugString(LOG_PREFIX..": No ACL changes required", 3)
+		return true
 	end
 
 	setCustomEventsEnabled(false)
 
-	local new = false
-	local admins = false
-
-	for i, acl in ipairs(aclList()) do
-		if not aclIsAuto(acl) then
-
+	for aclName, aclRights in pairs(adminACLs) do
+		local acl = aclGet(aclName)
+		if acl then
 			local updated = 0
-			local aclName = aclGetName(acl)
-			local adminACLRights = adminACLs[aclName] or {}
-
-			for i, right in ipairs(adminDefaultRights) do
-				local access = aclGetRight(acl, right)
-				if not isACLRightExist(acl, right) then access = nil end
-
-				if adminACLRights[right] ~= access then
-					if adminACLRights[right] == nil then
-						aclRemoveRight(acl, right)
-					else
-						aclSetRight(acl, right, adminACLRights[right])
-					end
+			for i, right in ipairs(setupRights) do
+				if aclRights[right] ~= nil and not aclRightExists(acl, right) then
+					aclSetRight(acl, right, aclRights[right])
 					updated = updated + 1
 				end
 			end
-	
-			if not admins then
-				admins = aclGetRight(acl, "general.adminpanel")
-			end
-	
 			if updated > 0 then
-				new = true
-				outputDebugString(LOG_PREFIX..": Updated "..updated.." entries in ACL '"..aclName.."'", 3)
+				outputDebugString(LOG_PREFIX..": Updated "..updated.." rights in ACL '"..aclName.."'", 3)
 			end
 		end
 	end
 
-	if not admins then
-		outputDebugString(LOG_PREFIX..": No ACL groups are able to use admin panel", 3)
-	end
-	if not new then
-		outputDebugString(LOG_PREFIX..": No ACL changes required", 3)
-	end
-
-	aclSave()
 	setCustomEventsEnabled(true)
 
 	return true
 end
 
 function aRestoreACL()
-	local backupNode = xmlLoadFile("conf/ACL_default.xml")
-	if not backupNode then
-		outputDebugString(LOG_PREFIX..": Couldn't load vanila ACL backup! Please reinstall the resource", 3)
+	local fileData = getACLConfigFileData("conf/ACL.xml")
+	if not fileData then
+		outputDebugString(LOG_PREFIX..": Couldn't load vanila ACL! Please reinstall the resource", 3)
 		return false
 	end
 
-	local fileNode = xmlCopyFile(backupNode, "conf/ACL.xml")
-	xmlUnloadFile(backupNode)
-	if not fileNode then
-		outputDebugString(LOG_PREFIX..": Couldn't restore vanila ACL!", 3)
+	local adminACLs = {}
+	local adminDefaultRights = {}
+	for i, aclData in ipairs(fileData.acls) do
+		adminACLs[aclData.name] = {}
+		for i, rightData in ipairs(aclData.rights) do
+			adminACLs[aclData.name][rightData.name] = rightData.access
+			if aclData.name == "Default" then
+				table.insert(adminDefaultRights, rightData.name)
+			end
+		end
+	end
+
+	if not adminACLs["Default"] then
+		outputDebugString(LOG_PREFIX..": Couldn't find 'Default' ACL! Please reinstall the resource", 3)
 		return false
 	end
 
-	xmlSaveFile(fileNode)
-	xmlUnloadFile(fileNode)
+	setCustomEventsEnabled(false)
+
+	for aclName, aclRights in pairs(adminACLs) do
+		local acl = aclGet(aclName) or aclCreate(aclName)
+		for ir, right in ipairs(adminDefaultRights) do
+			local access = aclGetRight(acl, right)
+			if not aclRightExists(acl, right) then
+				access = nil
+			end
+
+			if access ~= aclRights[right] then
+				if aclRights[right] == nil then
+					aclRemoveRight(acl, right)
+				else
+					aclSetRight(acl, right, aclRights[right])
+				end
+			end
+		end
+	end
+
+	setCustomEventsEnabled(true)
 	
-	aSetupACL()
 	triggerEvent("onAclReload", root)
-
-	outputDebugString(LOG_PREFIX..": Vanila ACL successfully restored", 3)
+	outputDebugString(LOG_PREFIX..": Admin panel rights successfully restored", 3)
 	
 	return true
 end
 
 function aRestoreServerACL()
 
-	local fileData = getACLConfigFileData("conf/server_ACL_default.xml")
+	local fileData = getACLConfigFileData("conf/serverACL.xml")
 	if not fileData then
 		outputDebugString(LOG_PREFIX..": Couldn't load default server ACL! Please reinstall the resource", 3)
 		return false
@@ -173,7 +190,6 @@ function aRestoreServerACL()
 		return false
 	end
 
-	-- anti event flood
 	setCustomEventsEnabled(false)
 
 	-- temporary rights
@@ -226,88 +242,19 @@ function aRestoreServerACL()
 
 	aclDestroyGroup(tempAdminGroup)
 	aclDestroy(tempAdminACL)
+	
 	setCustomEventsEnabled(true)
+	aRestoreACL()
 
 	outputDebugString(LOG_PREFIX..": Server ACL successfully restored", 3)
-	aRestoreACL()
 	
 	return true
-end
-
-function aACLSetRight(acl, right, access)
-	local fileNode = xmlLoadFile("conf/ACL.xml")
-	if not fileNode then
-		outputDebugString(LOG_PREFIX..": Couldn't load vanila ACL! Please use 'restoreadminacl' command or reinstall the resource", 3)
-		return false
-	end
-
-	local result = false
-	for i, aclNode in ipairs(xmlNodeGetChildren(fileNode)) do
-		if xmlNodeGetName(aclNode) == "acl" and xmlNodeGetAttribute(aclNode, "name") == acl then
-			for ir, rightNode in ipairs(xmlNodeGetChildren(aclNode)) do
-				if xmlNodeGetName(rightNode) == "right" and xmlNodeGetAttribute(rightNode, "name") == right then
-					result = xmlNodeSetAttribute(rightNode, "access", tostring(access == true)) 
-					break
-				end
-			end
-			break
-		end
-	end
-	xmlSaveFile(fileNode)
-	xmlUnloadFile(fileNode)
-
-	return result
-end
-
-function aACLRemoveRight(acl, right)
-	local fileNode = xmlLoadFile("conf/ACL.xml")
-	if not fileNode then
-		outputDebugString(LOG_PREFIX..": Couldn't load vanila ACL! Please use 'restoreadminacl' command or reinstall the resource", 3)
-		return false
-	end
-
-	local result = false
-	for i, aclNode in ipairs(xmlNodeGetChildren(fileNode)) do
-		if xmlNodeGetName(aclNode) == "acl" and xmlNodeGetAttribute(aclNode, "name") == acl then
-			for ir, rightNode in ipairs(xmlNodeGetChildren(aclNode)) do
-				if xmlNodeGetName(rightNode) == "right" and xmlNodeGetAttribute(rightNode, "name") == right then
-					result = xmlDestroyNode(rightNode)
-					break
-				end
-			end
-			break
-		end
-	end
-	xmlSaveFile(fileNode)
-	xmlUnloadFile(fileNode)
-	
-	return result
-end
-
-function aACLDestroy(acl)
-	local fileNode = xmlLoadFile("conf/ACL.xml")
-	if not fileNode then
-		outputDebugString(LOG_PREFIX..": Couldn't load vanila ACL! Please use 'restoreadminacl' command or reinstall the resource", 3)
-		return false
-	end
-
-	local result = false
-	for i, aclNode in ipairs(xmlNodeGetChildren(fileNode)) do
-		if xmlNodeGetName(aclNode) == "acl" and xmlNodeGetAttribute(aclNode, "name") == acl then
-			result = xmlDestroyNode(aclNode)
-			break
-		end
-	end
-	xmlSaveFile(fileNode)
-	xmlUnloadFile(fileNode)
-	
-	return result
 end
 
 function aACLGroupList()
 	local groups = {}
 	for i, group in ipairs(aclGroupList()) do
-		if hasGroupPermissionTo(group, "general.adminpanel") then
+		if not aclGroupIsAuto(group) and hasGroupPermissionTo(group, "general.adminpanel") then
 			groups[#groups + 1] = group
 		end
 	end
@@ -326,14 +273,14 @@ function aclGroupIsAuto(group)
 	return false
 end
 
-function isACLInGroup(acl, group)
+function aclInGroup(acl, group)
 	for i, groupACL in ipairs(aclGroupListACL(group)) do
 		if groupACL == acl then return true end
 	end
 	return false
 end
 
-function isACLRightExist(acl, right)
+function aclRightExists(acl, right)
 	for i, r in ipairs(aclListRights(acl)) do
 		if r == right then return true end
 	end
